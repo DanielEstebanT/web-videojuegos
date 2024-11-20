@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block titulo %} Inicio {% endblock %}
+
+{% block contenido %}
+    <h1>Bienvenido a Gears Games</h1>
+
+    <!-- Carrusel de imágenes de videojuegos -->
+    <div id="videojuegosCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for videojuego in videojuegos %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <!-- Imagen del videojuego -->
+                    <a href="{% url 'videojuegos-por-categoria' videojuego.categoria.id %}">
+                        <img src="{{ videojuego.imagen.url }}" class="d-block w-50 mx-auto" alt="{{ videojuego.titulo }}" style="height: 400px; object-fit: cover;">
+                    </a>
+                    <div class="carousel-caption" style="background-color: rgba(0, 0, 0, 0.5); padding: 2px 10px; border-radius: 3px; display: inline-block;">
+                        <h5 style="font-size: 2rem; font-family: Arial, sans-serif; font-weight: bold; color: white; text-shadow: 2px 2px 3px black;">
+                            {{ videojuego.titulo }}
+                        </h5>
+                        <p style="font-size: 1.5rem; font-weight: bold; color: white; text-shadow: 1px 1px 2px black;">
+                            {{ videojuego.categoria.titulo }}
+                        </p>
+                    </div>
+                    
+                    
+                    
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Controles del carrusel -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#videojuegosCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: black;"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#videojuegosCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: black;"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+{% endblock %}

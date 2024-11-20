@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block titulo %} Editar videojuego {% endblock %}
+
+{% block contenido%}
+<br>
+<div class="card">
+    <div class="card-header">Editar información videojuego</div>
+    <div class="card-body">
+        <h4 class="card-title">Datos del videojuego</h4>
+
+        {% include 'videojuegos/form.html' %}
+        
+    </div>
+    
+</div>
+
+{% endblock %}

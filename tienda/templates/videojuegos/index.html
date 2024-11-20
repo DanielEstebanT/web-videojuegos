@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block titulo %} Videojuegos en la categoría: {{ categoria.titulo }} {% endblock %}
+
+{% block contenido %}
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Videojuegos en la categoría "{{ categoria.titulo }}"</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {% for videojuego in videojuegos %}
+            <div class="col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    {% if videojuego.imagen %}
+                    <img src="{{ videojuego.imagen.url }}" class="card-img-top" alt="Imagen de {{ videojuego.titulo }}" style="height: 500px; object-fit: cover;">
+                    {% else %}
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Imagen no disponible" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ videojuego.titulo }}</h5>
+                        <p class="card-text">{{ videojuego.descripcion }}</p>
+                        
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No hay videojuegos en esta categoría.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

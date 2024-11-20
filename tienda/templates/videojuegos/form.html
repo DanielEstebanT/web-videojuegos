@@ -1,0 +1,27 @@
+<form enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {% for campo in formulario %}
+    <div class="form-floating mb-3">
+
+        {% if campo.field.widget.input_type == 'file' and campo.value %}
+            <img src="{{ campo.value.url }}" width="200" alt="Imagen actual">
+        {% endif %}
+        
+        {% if campo.name == 'categoria' %}
+            <select name="{{ campo.name }}" class="form-control" id="floatingInput">
+                {% for option in campo.field.queryset %}
+                    <option value="{{ option.id }}" {% if option.id == campo.value %}selected{% endif %}>{{ option }}</option>
+                {% endfor %}
+            </select>
+        {% else %}
+            <input type="{{ campo.field.widget.input_type }}" class="form-control" name="{{ campo.name }}" id="floatingInput" aria-describedby="helpId" placeholder="{{ campo.label }}" value="{{ campo.value | default:'' }}" />
+        {% endif %}
+        <label for="floatingInput" class="form-label">{{ campo.label }}</label>
+    </div>
+    <div class="col-12 help-text"> {{ campo.errors }}</div>
+    {% endfor %}
+
+    <input name="" id="" class="btn btn-success" type="submit" value="Enviar" />
+    <a name="" id="" class="btn btn-primary" href="{% url 'admin-videojuegos' %}" role="button">Cancelar</a>
+    
+</form>
